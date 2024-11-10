@@ -1,0 +1,169 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+// Main Appointment class
+public class Appointment {
+    private String appointmentID;
+    private Patient patient;
+    private Doctor doctor;
+    private Date date;
+    private TimeSlot timeSlot;
+    private AppointmentStatus status;
+
+    // Constructor
+    public Appointment(String appointmentID, Patient patient, Doctor doctor, Date date, TimeSlot timeSlot) {
+        this.appointmentID = appointmentID;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.date = date;
+        this.timeSlot = timeSlot;
+        this.status = AppointmentStatus.CONFIRMED; // Default status set to CONFIRMED
+    }
+
+    // Methods
+    public void schedule() {
+        this.status = AppointmentStatus.CONFIRMED;
+    }
+
+    public void reschedule(Date newDate, TimeSlot newTimeSlot) {
+        this.date = newDate;
+        this.timeSlot = newTimeSlot;
+        this.status = AppointmentStatus.CONFIRMED; // Reset status to confirmed after rescheduling
+    }
+
+    public void cancel() {
+        this.status = AppointmentStatus.CANCELED;
+    }
+
+    public void updateStatus(AppointmentStatus newStatus) {
+        this.status = newStatus;
+    }
+
+    // Getters and Setters
+    public String getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public AppointmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
+    }
+}
+
+// AppointmentOutcomeRecord class
+class AppointmentOutcomeRecord {
+    private Appointment appointment;
+    private Date dateOfAppointment;
+    private String serviceType;
+    private List<Prescription> prescribedMedications;
+    private String consultationNotes;
+
+    // Constructor
+    public AppointmentOutcomeRecord(Appointment appointment, Date dateOfAppointment, String serviceType, String consultationNotes) {
+        this.appointment = appointment;
+        this.dateOfAppointment = dateOfAppointment;
+        this.serviceType = serviceType;
+        this.consultationNotes = consultationNotes;
+        this.prescribedMedications = new ArrayList<>();
+    }
+
+    // Methods
+    public void recordOutcome() {
+        // This method can be used to save or finalize the outcome details
+    }
+
+    public void addPrescription(Prescription prescription) {
+        prescribedMedications.add(prescription);
+    }
+
+    // Getters and Setters
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public Date getDateOfAppointment() {
+        return dateOfAppointment;
+    }
+
+    public void setDateOfAppointment(Date dateOfAppointment) {
+        this.dateOfAppointment = dateOfAppointment;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public List<Prescription> getPrescribedMedications() {
+        return prescribedMedications;
+    }
+
+    public String getConsultationNotes() {
+        return consultationNotes;
+    }
+
+    public void setConsultationNotes(String consultationNotes) {
+        this.consultationNotes = consultationNotes;
+    }
+}
+
+// AppointmentStatus enum
+enum AppointmentStatus {
+    CONFIRMED,
+    CANCELED,
+    COMPLETED
+}
+
+// Placeholder classes for Patient, Doctor, Prescription, and TimeSlot
+// These should be implemented in detail based on the requirements in your UML diagram.
+
+class Patient {
+    // Placeholder implementation for the Patient class
+}
+
+class Doctor {
+    // Placeholder implementation for the Doctor class
+}
+
+class Prescription {
+    // Placeholder implementation for the Prescription class
+}
+
+class TimeSlot {
+    // Placeholder implementation for the TimeSlot class
+}
